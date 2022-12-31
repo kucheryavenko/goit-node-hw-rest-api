@@ -12,10 +12,11 @@ router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getById));
 
 router.post("/", validateBody(addSchema), ctrlWrapper(ctrl.add));
 
-router.delete("/:contactId", ctrlWrapper(ctrl.removeById));
+router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeById));
 
 router.put(
   "/:contactId",
+  isValidId,
   validateBody(addSchema),
   ctrlWrapper(ctrl.updateById)
 );
