@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const app = require("./app");
 
-const PORT = process.env.PORT || 3000;
-const uriDb = process.env.DB_HOST;
+const { DB_HOST, PORT = 3000 } = process.env;
 
 mongoose
-  .connect(uriDb)
+  .connect(DB_HOST)
   .then(() =>
     app.listen(PORT, () => {
       console.log(`Server running. Use our API on port: ${PORT}`);
