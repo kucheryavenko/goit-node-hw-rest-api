@@ -3,9 +3,16 @@ const { HttpError } = require("../../helpers");
 
 const updateById = async (req, res, next) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-    new: true,
-  });
+  const { _id: owner } = req.user;
+
+  const result = await Contact.findOneAndUpdate(
+    { contactId, owner },
+    req.body,
+    {
+      new: true,
+    }
+  );
+
   if (!result) {
     throw HttpError(404, "Not found");
   }
